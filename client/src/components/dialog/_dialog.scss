@@ -1,0 +1,85 @@
+.dialog {
+    z-index: 1000;
+    background-color: rgb(255, 255, 255, 50%);
+    width: 100%;
+    display: none;
+    height: 100%;
+    position: absolute;
+
+    &__active {
+        display: block !important;
+    }
+
+    &__form-input {
+        outline: none;
+    }
+
+    &__additional {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    &__authors {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 4px;
+    }
+
+    &__author-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__form-submit {
+        width: 100%;
+        padding: 12px;
+        background-color: white;
+
+        &:hover {
+            cursor: pointer;
+            background-color: var(--color-red);
+            color: white;
+        }
+    }
+
+    &__form-annotation {
+        height: 200px;
+        resize: none;
+        outline: none;
+    }
+
+    &__header {
+        text-align: center;
+    }
+
+    &__form-label {
+        margin-right: 4px;
+    }
+
+    &__form {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        gap: 16px;
+        height: 100%;
+    }
+
+    &__wrapper {
+        padding: 32px;
+        color: var(--color-black);
+        background-color: var(--color-white);
+        border: 2px solid rgb(0, 0, 0, 70%);
+        box-shadow: 10px 5px 5px rgb(0, 0, 0, 20%);
+        border-radius: var(--border-radius-large);
+        width: 400px;
+        position: relative;
+        min-height: 400px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

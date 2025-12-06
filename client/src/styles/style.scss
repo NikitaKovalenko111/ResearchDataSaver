@@ -1,0 +1,22 @@
+@import './fonts',
+'./globals',
+'./media',
+'./mixins',
+'./normalize',
+'./utils',
+'./variables';
+
+@import './../pages/items/items',
+        './../components/Item/item',
+        './../components/dialog/dialog';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+div {
+    color: var(--color-white);
+}
+
+body {
+    background-color: var(--color-black);
+    font-family: "Roboto Condensed";
+}
