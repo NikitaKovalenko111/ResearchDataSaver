@@ -1,4 +1,4 @@
-FROM golang:ubuntu
+FROM golang:latest
 
 WORKDIR /server
 
