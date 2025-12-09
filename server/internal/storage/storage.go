@@ -29,27 +29,27 @@ func Prepare(db *sql.DB) error {
 		`
 		CREATE TABLE IF NOT EXISTS public.documents
 		(
-			id integer NOT NULL DEFAULT nextval('documents_id_seq'::regclass),
-			document_name text COLLATE pg_catalog."default" NOT NULL,
-			document_annotation text COLLATE pg_catalog."default" NOT NULL,
-			document_link text COLLATE pg_catalog."default" NOT NULL,
+			id SERIAL NOT NULL,
+			document_name text NOT NULL,
+			document_annotation text NOT NULL,
+			document_link text NOT NULL,
 			document_publishing_date date,
-			document_author character varying(256) COLLATE pg_catalog."default",
+			document_author character varying(256),
 			CONSTRAINT documents_pkey PRIMARY KEY (id),
 			CONSTRAINT documents_document_name_key UNIQUE (document_name)
 		);
 
 		CREATE TABLE IF NOT EXISTS public.fips_content
 		(
-			id integer NOT NULL DEFAULT nextval('fips_content_id_seq'::regclass),
-			content_type character varying(64) COLLATE pg_catalog."default" NOT NULL,
-			content_name character varying(256) COLLATE pg_catalog."default" NOT NULL,
-			content_annotation text COLLATE pg_catalog."default",
-			content_registration character varying(32) COLLATE pg_catalog."default" NOT NULL,
+			id SERIAL NOT NULL,
+			content_type character varying(64) NOT NULL,
+			content_name character varying(256) NOT NULL,
+			content_annotation text,
+			content_registration character varying(32) NOT NULL,
 			content_publishing_date date NOT NULL,
-			content_applicant character varying(64) COLLATE pg_catalog."default",
-			content_address character varying(256) COLLATE pg_catalog."default" NOT NULL,
-			link text COLLATE pg_catalog."default",
+			content_applicant character varying(64),
+			content_address character varying(256) NOT NULL,
+			link text COLLATE,
 			CONSTRAINT fips_content_pkey PRIMARY KEY (id),
 			CONSTRAINT fips_content_content_name_key UNIQUE (content_name),
 			CONSTRAINT fips_content_content_registration_key UNIQUE (content_registration)
@@ -57,8 +57,8 @@ func Prepare(db *sql.DB) error {
 
 		CREATE TABLE IF NOT EXISTS public.fips_content_authors
 		(
-			id integer NOT NULL DEFAULT nextval('fips_content_authors_id_seq'::regclass),
-			author_fullname character varying(128) COLLATE pg_catalog."default" NOT NULL,
+			id SERIAL NOT NULL,
+			author_fullname character varying(128) NOT NULL,
 			content_id integer,
 			CONSTRAINT fips_content_authors_pkey PRIMARY KEY (id),
 			CONSTRAINT fips_content_authors_content_id_fkey FOREIGN KEY (content_id)
@@ -69,29 +69,29 @@ func Prepare(db *sql.DB) error {
 
 		CREATE TABLE IF NOT EXISTS public.internet_articles
 		(
-			id integer NOT NULL DEFAULT nextval('internet_articles_id_seq'::regclass),
-			article_name character varying(256) COLLATE pg_catalog."default" NOT NULL,
-			article_annotation text COLLATE pg_catalog."default" NOT NULL,
-			article_link text COLLATE pg_catalog."default" NOT NULL,
+			id SERIAL NOT NULL,
+			article_name character varying(256) NOT NULL,
+			article_annotation text,
+			article_link text NOT NULL,
 			article_publishing_date date,
-			article_author character varying(256) COLLATE pg_catalog."default",
-			searching_machine character varying(64) COLLATE pg_catalog."default",
+			article_author character varying(256),
+			searching_machine character varying(64),
 			CONSTRAINT internet_articles_pkey PRIMARY KEY (id),
 			CONSTRAINT internet_articles_article_name_key UNIQUE (article_name)
 		);
 
 		CREATE TABLE IF NOT EXISTS public.library_articles
 		(
-			id integer NOT NULL DEFAULT nextval('library_articles_id_seq'::regclass),
-			article_name character varying(256) COLLATE pg_catalog."default" NOT NULL,
-			article_annotation text COLLATE pg_catalog."default" NOT NULL,
-			article_link text COLLATE pg_catalog."default" NOT NULL,
+			id SERIAL NOT NULL,
+			article_name character varying(256) NOT NULL,
+			article_annotation text NOT NULL,
+			article_link text NOT NULL,
 			article_publishing_date date,
-			article_lang character varying(96) COLLATE pg_catalog."default" NOT NULL,
-			article_udk character varying(30) COLLATE pg_catalog."default" NOT NULL,
-			article_publisher_object character varying(128) COLLATE pg_catalog."default",
-			article_publisher character varying(256) COLLATE pg_catalog."default",
-			article_supervisor character varying(128) COLLATE pg_catalog."default",
+			article_lang character varying(96) NOT NULL,
+			article_udk character varying(30) NOT NULL,
+			article_publisher_object character varying(128),
+			article_publisher character varying(256),
+			article_supervisor character varying(128),
 			CONSTRAINT library_articles_pkey PRIMARY KEY (id),
 			CONSTRAINT library_articles_article_link_key UNIQUE (article_link),
 			CONSTRAINT library_articles_article_name_key UNIQUE (article_name)
@@ -99,8 +99,8 @@ func Prepare(db *sql.DB) error {
 
 		CREATE TABLE IF NOT EXISTS public.library_articles_authors
 		(
-			id integer NOT NULL DEFAULT nextval('library_articles_authors_id_seq'::regclass),
-			author_fullname character varying(128) COLLATE pg_catalog."default" NOT NULL,
+			id SERIAL NOT NULL,
+			author_fullname character varying(128) NOT NULL,
 			article_id integer,
 			CONSTRAINT library_articles_authors_pkey PRIMARY KEY (id),
 			CONSTRAINT library_articles_authors_article_id_fkey FOREIGN KEY (article_id)
