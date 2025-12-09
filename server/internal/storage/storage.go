@@ -37,7 +37,7 @@ func Prepare(db *sql.DB) error {
 			document_author character varying(256) COLLATE pg_catalog."default",
 			CONSTRAINT documents_pkey PRIMARY KEY (id),
 			CONSTRAINT documents_document_name_key UNIQUE (document_name)
-		)
+		);
 
 		CREATE TABLE IF NOT EXISTS public.fips_content
 		(
@@ -53,7 +53,7 @@ func Prepare(db *sql.DB) error {
 			CONSTRAINT fips_content_pkey PRIMARY KEY (id),
 			CONSTRAINT fips_content_content_name_key UNIQUE (content_name),
 			CONSTRAINT fips_content_content_registration_key UNIQUE (content_registration)
-		)
+		);
 
 		CREATE TABLE IF NOT EXISTS public.fips_content_authors
 		(
@@ -65,7 +65,7 @@ func Prepare(db *sql.DB) error {
 				REFERENCES public.fips_content (id) MATCH SIMPLE
 				ON UPDATE NO ACTION
 				ON DELETE NO ACTION
-		)
+		);
 
 		CREATE TABLE IF NOT EXISTS public.internet_articles
 		(
@@ -78,7 +78,7 @@ func Prepare(db *sql.DB) error {
 			searching_machine character varying(64) COLLATE pg_catalog."default",
 			CONSTRAINT internet_articles_pkey PRIMARY KEY (id),
 			CONSTRAINT internet_articles_article_name_key UNIQUE (article_name)
-		)
+		);
 
 		CREATE TABLE IF NOT EXISTS public.library_articles
 		(
@@ -95,7 +95,7 @@ func Prepare(db *sql.DB) error {
 			CONSTRAINT library_articles_pkey PRIMARY KEY (id),
 			CONSTRAINT library_articles_article_link_key UNIQUE (article_link),
 			CONSTRAINT library_articles_article_name_key UNIQUE (article_name)
-		)
+		);
 
 		CREATE TABLE IF NOT EXISTS public.library_articles_authors
 		(
@@ -107,7 +107,7 @@ func Prepare(db *sql.DB) error {
 				REFERENCES public.library_articles (id) MATCH SIMPLE
 				ON UPDATE NO ACTION
 				ON DELETE NO ACTION
-		)
+		);
 		`,
 	)
 
