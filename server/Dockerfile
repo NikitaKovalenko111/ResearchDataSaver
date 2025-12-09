@@ -2,11 +2,6 @@ FROM golang:latest
 
 WORKDIR /server
 
-COPY go.mod .
-COPY go.sum .
-
-RUN go install
-
 COPY . .
 
 RUN go build -o server ./cmd/main.go
