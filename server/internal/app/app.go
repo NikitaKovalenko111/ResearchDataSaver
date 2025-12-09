@@ -24,6 +24,12 @@ func Run() {
 
 	logger.Info("Successfully connected to database")
 
+	err := storage.Prepare(db)
+
+	if err != nil {
+		panic("Couldn't prepare db!")
+	}
+
 	storage := storage.Init(db)
 
 	logger.Info("Storage initialized")
