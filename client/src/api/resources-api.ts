@@ -2,7 +2,7 @@ import axios from "axios";
 import type { ItemPayload, ItemT } from "../types";
 
 const instance = axios.create({
-    baseURL: import.meta.env.API_SERVER,
+    baseURL: process.env.API_SERVER,
     headers: {
         "Content-Type": "application/json",
     },
