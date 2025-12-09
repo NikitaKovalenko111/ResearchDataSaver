@@ -49,7 +49,7 @@ func Prepare(db *sql.DB) error {
 			content_publishing_date date NOT NULL,
 			content_applicant character varying(64),
 			content_address character varying(256) NOT NULL,
-			link text COLLATE,
+			link text NOT NULL,
 			CONSTRAINT fips_content_pkey PRIMARY KEY (id),
 			CONSTRAINT fips_content_content_name_key UNIQUE (content_name),
 			CONSTRAINT fips_content_content_registration_key UNIQUE (content_registration)
