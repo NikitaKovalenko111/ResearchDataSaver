@@ -25,10 +25,11 @@ export const ItemsPage: React.FC<PropsType> = (): JSX.Element => {
         dispatch({
             type: 'resources/getResources',
             payload: {
-                type: type
+                type: type,
+                searchText: searchText
             }
         })
-    }, [type])
+    }, [type, searchText])
 
     return (
         <>

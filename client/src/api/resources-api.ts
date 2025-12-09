@@ -2,16 +2,16 @@ import axios from "axios";
 import type { ItemPayload, ItemT } from "../types";
 
 const instance = axios.create({
-    baseURL: "http://localhost:3001",
+    baseURL: import.meta.env.API_SERVER,
     headers: {
         "Content-Type": "application/json",
     },
 })
 
-export const getResources = async (type: string): Promise<ItemT[]> => {
+export const getResources = async (type: string, searchText: string): Promise<ItemT[]> => {
     switch (type) {
         case "document": {
-            const response = await instance.get("/document/all");
+            const response = await instance.get(`/document/all?name=${searchText}`);
 
             const responseObj: ItemT[] = response.data ? [
                 ...response.data.map((el: any): ItemT => {
@@ -30,7 +30,7 @@ export const getResources = async (type: string): Promise<ItemT[]> => {
             return responseObj
         }
         case "fips_content": {
-            const response = await instance.get("/fips/all");
+            const response = await instance.get(`/fips/all?name=${searchText}`);
 
             const responseObj: ItemT[] = response.data ? [
                 ...response.data.map((el: any): ItemT => {
@@ -53,7 +53,7 @@ export const getResources = async (type: string): Promise<ItemT[]> => {
             return responseObj
         }
         case "internet_article": {
-            const response = await instance.get("/internet-article/all");
+            const response = await instance.get(`/internet-article/all?name=${searchText}`);
             const responseObj: ItemT[] = response.data ? [
                 ...response.data.map((el: any): ItemT => {
                     return {
@@ -72,7 +72,7 @@ export const getResources = async (type: string): Promise<ItemT[]> => {
             return responseObj
         }
         case "library_article": {
-            const response = await instance.get("/library-article/all");
+            const response = await instance.get(`/library-article/all?name=${searchText}`);
 
             const responseObj: ItemT[] = response.data ? [
                 ...response.data.map((el: any): ItemT => {

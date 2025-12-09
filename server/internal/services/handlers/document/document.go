@@ -27,10 +27,10 @@ func (s *DocumentService) AddDocument(name string, annotation string, link strin
 	return document, nil
 }
 
-func (s *DocumentService) GetAll() (*[]models.Document, error) {
+func (s *DocumentService) GetAll(queryName string) (*[]models.Document, error) {
 	var documents *[]models.Document
 
-	documents, err := s.repo.GetAll()
+	documents, err := s.repo.GetAll(queryName)
 
 	if err != nil {
 		return nil, err

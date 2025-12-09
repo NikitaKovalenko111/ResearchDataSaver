@@ -42,14 +42,16 @@ func (repo *InternetArticleRepo) AddArticle(name string, annotation string, link
 	return &InternetArticle, nil
 }
 
-func (repo *InternetArticleRepo) GetArticles() (*[]models.InternetArticle, error) {
+func (repo *InternetArticleRepo) GetArticles(queryName string) (*[]models.InternetArticle, error) {
 	var articles []models.InternetArticle
 
 	rows, err := repo.db.Query(
 		`
 		SELECT id, article_name, article_annotation, article_link, article_publishing_date, article_author, searching_machine
 		FROM internet_articles
+		WHERE article_name LIKE $1
 		`,
+		"%"+queryName+"%",
 	)
 
 	if err != nil {

@@ -1,7 +1,6 @@
 package internetArticleController
 
 import (
-	"fmt"
 	internetArticleService "research-data-saver/internal/services/handlers/internetArticle"
 
 	"github.com/gofiber/fiber/v2"
@@ -56,13 +55,14 @@ func (controller *InternetArticleController) CreateInternetArticle(c *fiber.Ctx)
 }
 
 func (controller *InternetArticleController) GetInternetArticles(c *fiber.Ctx) error {
-	var articles, err = controller.service.GetAll()
+	var queryName = c.Query("name")
+
+	var articles, err = controller.service.GetAll(queryName)
 
 	if err != nil {
-		fmt.Println(err)
-		//return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-		//	"error": "Cannot get internet articles",
-		//})
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": "Cannot get internet articles",
+		})
 	}
 
 	return c.Status(fiber.StatusOK).JSON(articles)

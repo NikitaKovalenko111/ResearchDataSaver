@@ -25,10 +25,10 @@ func (r *DocumentRepository) Create(name string, annotation string, link string,
 	return &createdDocument, nil
 }
 
-func (r *DocumentRepository) GetAll() (*[]models.Document, error) {
+func (r *DocumentRepository) GetAll(queryName string) (*[]models.Document, error) {
 	var document []models.Document
-	query := `SELECT id, document_name, document_annotation, document_link, document_publishing_date, document_author FROM documents`
-	rows, err := r.db.Query(query)
+	query := `SELECT id, document_name, document_annotation, document_link, document_publishing_date, document_author FROM documents WHERE document_name LIKE $1`
+	rows, err := r.db.Query(query, "%"+queryName+"%")
 
 	if err != nil {
 		return nil, err

@@ -8,6 +8,7 @@ interface GetResourcesAction extends Action<string> {
     type: 'resources/getResources';
     payload: {
         type: string;
+        searchText: string
     }
 }
 
@@ -17,7 +18,7 @@ interface AddResourceAction extends Action<string> {
 }
 
 function* getResourcesSaga(action: GetResourcesAction) {
-    const resources: ItemT[] = yield call(getResources, action.payload.type);
+    const resources: ItemT[] = yield call(getResources, action.payload.type, action.payload.searchText);
     yield put(setResources(resources));
 }
 

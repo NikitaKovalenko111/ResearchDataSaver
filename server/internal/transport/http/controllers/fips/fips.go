@@ -58,7 +58,9 @@ func (controller *FipsController) CreateFips(c *fiber.Ctx) error {
 }
 
 func (controller *FipsController) GetFips(c *fiber.Ctx) error {
-	fips, err := controller.service.GetAll()
+	var queryName = c.Query("name")
+
+	fips, err := controller.service.GetAll(queryName)
 
 	if err != nil {
 		c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{

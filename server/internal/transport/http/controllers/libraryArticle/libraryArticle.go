@@ -61,7 +61,9 @@ func (controller *LibraryArticleController) CreateLibraryArticle(c *fiber.Ctx) e
 }
 
 func (controller *LibraryArticleController) GetLibraryArticles(c *fiber.Ctx) error {
-	articles, err := controller.service.GetAll()
+	var queryName = c.Query("name")
+
+	articles, err := controller.service.GetAll(queryName)
 
 	if err != nil {
 		fmt.Println(err)

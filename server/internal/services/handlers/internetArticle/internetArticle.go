@@ -15,10 +15,10 @@ func Init(repo *internetArticleRepo.InternetArticleRepo) *InternetArticleService
 	}
 }
 
-func (s *InternetArticleService) GetAll() (*[]models.InternetArticle, error) {
+func (s *InternetArticleService) GetAll(queryName string) (*[]models.InternetArticle, error) {
 	var articles *[]models.InternetArticle
 
-	articles, err := s.repo.GetArticles()
+	articles, err := s.repo.GetArticles(queryName)
 
 	if err != nil {
 		return nil, err
