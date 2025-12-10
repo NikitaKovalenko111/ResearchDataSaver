@@ -288,6 +288,12 @@ svg * {
   text-transform: uppercase;
   margin-bottom: 24px;
 }
+.items__input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
 .items__select {
   margin-bottom: 8px;
 }

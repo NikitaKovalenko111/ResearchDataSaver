@@ -1,17 +1,22 @@
 import axios from "axios";
-import type { ItemPayload, ItemT } from "../types";
+import type { ItemPayload, ItemT, ItemType, searchObj } from "../types";
 
 const instance = axios.create({
-    baseURL: process.env.API_SERVER,
+    baseURL: "http://localhost:3001",
     headers: {
         "Content-Type": "application/json",
     },
 })
 
-export const getResources = async (type: string, searchText: string): Promise<ItemT[]> => {
+export const getResources = async (type: ItemType, searchText: string, searchObj: searchObj): Promise<ItemT[]> => {
+    const { fipsType, lang, reg, supervisor, date, sm } = searchObj
+
+    console.log(searchObj);
+    
+
     switch (type) {
         case "document": {
-            const response = await instance.get(`/document/all?name=${searchText}`);
+            const response = await instance.get(`/document/all?name=${searchText}${(date != '') ? `&date=${date}` : ''}`);
 
             const responseObj: ItemT[] = response.data ? [
                 ...response.data.map((el: any): ItemT => {
@@ -30,7 +35,7 @@ export const getResources = async (type: string, searchText: string): Promise<It
             return responseObj
         }
         case "fips_content": {
-            const response = await instance.get(`/fips/all?name=${searchText}`);
+            const response = await instance.get(`/fips/all?name=${searchText}${(fipsType == 'patent' || fipsType == 'program') ? `&fipsType=${fipsType}` : ''}${(reg != '') ? `&reg=${reg}` : ''}${(date != '') ? `&date=${date}` : ''}`);
 
             const responseObj: ItemT[] = response.data ? [
                 ...response.data.map((el: any): ItemT => {
@@ -53,7 +58,7 @@ export const getResources = async (type: string, searchText: string): Promise<It
             return responseObj
         }
         case "internet_article": {
-            const response = await instance.get(`/internet-article/all?name=${searchText}`);
+            const response = await instance.get(`/internet-article/all?name=${searchText}${(date != '') ? `&date=${date}` : ''}${(sm != '') ? `&sm=${sm}` : ''}`);
             const responseObj: ItemT[] = response.data ? [
                 ...response.data.map((el: any): ItemT => {
                     return {
@@ -72,7 +77,7 @@ export const getResources = async (type: string, searchText: string): Promise<It
             return responseObj
         }
         case "library_article": {
-            const response = await instance.get(`/library-article/all?name=${searchText}`);
+            const response = await instance.get(`/library-article/all?name=${searchText}${(lang != '') ? `&lang=${lang}` : ''}${(supervisor != '') ? `&supervisor=${supervisor}` : ''}${(date != '') ? `&date=${date}` : ''}`);
 
             const responseObj: ItemT[] = response.data ? [
                 ...response.data.map((el: any): ItemT => {

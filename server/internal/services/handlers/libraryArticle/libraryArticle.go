@@ -15,10 +15,10 @@ func Init(repo *libraryArticleRepo.LibraryArticleRepo) *LibraryArticleService {
 	}
 }
 
-func (s *LibraryArticleService) GetAll(queryName string) (*[]models.LibraryArticle, error) {
+func (s *LibraryArticleService) GetAll(queryName string, queryDate string, queryLang string, querySupervisor string) (*[]models.LibraryArticle, error) {
 	var articles *[]models.LibraryArticle
 
-	articles, err := s.repo.GetArticles(queryName)
+	articles, err := s.repo.GetArticles(queryName, queryDate, queryLang, querySupervisor)
 
 	if err != nil {
 		return nil, err

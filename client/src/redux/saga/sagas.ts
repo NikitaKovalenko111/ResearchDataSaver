@@ -1,7 +1,7 @@
 import { getResources, sendDocument, sendInternetArticle, sendLibraryArticle, sendFipsContent } from './../../api/resources-api';
 import { call, put, takeLatest } from 'redux-saga/effects'
 import type { Action } from '@reduxjs/toolkit';
-import type { ItemPayload, ItemT } from '../../types';
+import type { ItemPayload, ItemT, searchObj } from '../../types';
 import { setResources } from '../features/resources/resourcesSlice';
 
 interface GetResourcesAction extends Action<string> {
@@ -9,6 +9,7 @@ interface GetResourcesAction extends Action<string> {
     payload: {
         type: string;
         searchText: string
+        searchObj: searchObj
     }
 }
 
@@ -18,7 +19,8 @@ interface AddResourceAction extends Action<string> {
 }
 
 function* getResourcesSaga(action: GetResourcesAction) {
-    const resources: ItemT[] = yield call(getResources, action.payload.type, action.payload.searchText);
+    // @ts-ignore
+    const resources: ItemT[] = yield call(getResources, action.payload.type, action.payload.searchText, action.payload.searchObj);
     yield put(setResources(resources));
 }
 

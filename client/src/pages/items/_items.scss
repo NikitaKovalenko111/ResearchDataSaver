@@ -6,6 +6,13 @@
         text-transform: uppercase;
         margin-bottom: 24px;
     }
+
+    &__input-wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+    }
     
     &__select {
         margin-bottom: 8px;

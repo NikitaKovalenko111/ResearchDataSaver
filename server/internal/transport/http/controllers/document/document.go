@@ -57,8 +57,9 @@ func (controller *DocumentController) CreateDocument(c *fiber.Ctx) error {
 
 func (controller *DocumentController) GetDocuments(c *fiber.Ctx) error {
 	var queryName = c.Query("name")
+	var queryDate = c.Query("date")
 
-	var documents, err = controller.service.GetAll(queryName)
+	var documents, err = controller.service.GetAll(queryName, queryDate)
 
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{

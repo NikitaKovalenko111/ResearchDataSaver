@@ -3,9 +3,12 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
-  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+  const env = loadEnv(mode, process.cwd(), '')
 
   return {
+    define: {
+      API_SERVER: JSON.stringify(env.API_SERVER)
+    },
     plugins: [
       react({
         babel: {

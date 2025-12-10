@@ -64,10 +64,10 @@ func (r *FipsRepository) Create(name string, link string, fipsType string, annot
 	return &createdFips, nil
 }
 
-func (r *FipsRepository) GetAll(queryName string) (*[]models.FipsContent, error) {
+func (r *FipsRepository) GetAll(queryName string, queryContentType string, queryContentReg string, queryContentDate string) (*[]models.FipsContent, error) {
 	var fipsContents []models.FipsContent
-	query := `SELECT id, content_name, link, content_type, content_annotation, content_registration, content_publishing_date, content_applicant, content_address FROM fips_content WHERE content_name LIKE $1`
-	rows, err := r.db.Query(query, "%"+queryName+"%")
+	query := `SELECT id, content_name, link, content_type, content_annotation, content_registration, content_publishing_date, content_applicant, content_address FROM fips_content WHERE content_name LIKE $1 AND content_type LIKE $2 AND content_registration LIKE $3 AND TO_CHAR(content_publishing_date, 'YYYY-MM-DD') LIKE $4`
+	rows, err := r.db.Query(query, "%"+queryName+"%", "%"+queryContentType+"%", "%"+queryContentReg+"%", "%"+queryContentDate+"%")
 
 	if err != nil {
 		return nil, err

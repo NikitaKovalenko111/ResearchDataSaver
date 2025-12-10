@@ -20,6 +20,15 @@ export type ItemT = {
     itemName: string
 }
 
+export interface searchObj {
+    fipsType?: 'patent' | 'program' | 'all'
+    lang?: string
+    date?: string
+    supervisor?: string
+    reg?: string
+    sm?: string
+}
+
 export type ItemPayload = {
     itemAnnotation: string
     itemLink: string

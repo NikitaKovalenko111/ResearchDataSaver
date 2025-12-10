@@ -15,10 +15,10 @@ func Init(repo *fipsRepo.FipsRepository) *FipsService {
 	}
 }
 
-func (s *FipsService) GetAll(queryName string) (*[]models.FipsContent, error) {
+func (s *FipsService) GetAll(queryName string, queryContentType string, queryContentReg string, queryContentDate string) (*[]models.FipsContent, error) {
 	var fips *[]models.FipsContent
 
-	fips, err := s.repo.GetAll(queryName)
+	fips, err := s.repo.GetAll(queryName, queryContentType, queryContentReg, queryContentDate)
 
 	if err != nil {
 		return nil, err

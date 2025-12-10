@@ -71,7 +71,7 @@ func (repo *LibraryArticleRepo) AddArticle(name string, annotation string, link 
 	return &article, nil
 }
 
-func (repo *LibraryArticleRepo) GetArticles(queryName string) (*[]models.LibraryArticle, error) {
+func (repo *LibraryArticleRepo) GetArticles(queryName string, queryDate string, queryLang string, querySupervisor string) (*[]models.LibraryArticle, error) {
 	var articles []models.LibraryArticle
 
 	rows, err := repo.db.Query(
@@ -79,9 +79,9 @@ func (repo *LibraryArticleRepo) GetArticles(queryName string) (*[]models.Library
 		SELECT
 		id, article_name, article_annotation, article_link, article_publishing_date, article_lang, article_udk, article_publisher_object, article_publisher, article_supervisor
 		FROM library_articles
-		WHERE article_name LIKE $1
+		WHERE article_name LIKE $1 AND TO_CHAR(article_publishing_date, 'YYYY-MM-DD') LIKE $2 AND article_lang LIKE $3 AND article_supervisor LIKE $4
 		`,
-		"%"+queryName+"%",
+		"%"+queryName+"%", "%"+queryDate+"%", "%"+queryLang+"%", "%"+querySupervisor+"%",
 	)
 
 	if err != nil {

@@ -56,8 +56,10 @@ func (controller *InternetArticleController) CreateInternetArticle(c *fiber.Ctx)
 
 func (controller *InternetArticleController) GetInternetArticles(c *fiber.Ctx) error {
 	var queryName = c.Query("name")
+	var querySm = c.Query("sm")
+	var queryDate = c.Query("date")
 
-	var articles, err = controller.service.GetAll(queryName)
+	var articles, err = controller.service.GetAll(queryName, querySm, queryDate)
 
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
